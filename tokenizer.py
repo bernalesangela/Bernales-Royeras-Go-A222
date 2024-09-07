@@ -2,7 +2,7 @@ class TokenType:
     Delimiter = "Delimiter"
     LineBreak = "Line Break"  
     Identifier = "Identifier"  
-    Punctuator = "Punctuator" 
+    Punctuator = "Punctuation" 
     Numeric = "Numeric"  
     Whitespace = "Whitespace" 
 
