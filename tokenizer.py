@@ -91,7 +91,7 @@ def granularBreakdown(tokens):
             print(f'Token: "{token.value}" --> {chars}')
     else:
         
-        print("No tokens generated (no delimiter present).")
+        print("No tokens generated.")
 
 
 def main():
@@ -114,7 +114,7 @@ def main():
             for token in tokens:
                 print(token)
         else:
-            print("No tokens generated (no delimiter present).")
+            print("No tokens generated.")
 
         granularBreakdown(tokens)
 
