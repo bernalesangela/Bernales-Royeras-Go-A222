@@ -5,6 +5,7 @@ class TokenType:
     Delimiter = "Delimiter"
     LineBreak = "Line Break"
     Punctuation = "Punctuation"
+    SpecialChar = "Special Character"
     Whitespace = "Whitespace"
     Mixed = "Mixed"  
 
@@ -30,8 +31,10 @@ def categorize(token):
             return TokenType.Mixed
         elif all(char in ' ' for char in token):
             return TokenType.Whitespace
-        else:
+        elif all(char in '.,!?()"\';—-' for char in token):
             return TokenType.Punctuation
+        else:
+            return TokenType.SpecialChar
     elif has_alpha:
         return TokenType.Word
     elif has_digit:
@@ -98,8 +101,8 @@ def main():
     sampleText1 = "123angela:bernales789"
     sampleText2 = "Hello, world! Version 2.0 is here on 2024-08-27."
     sampleText3 = "delimiter:_:test\n:New line here:"
-    sampleText4 = "123456:numbers:and:some:words:"
-    sampleText5 = ""
+    sampleText4 = "123456:numbers:and:some:words:?"
+    sampleText5 = ";"
 
     sampleTexts = [sampleText1, sampleText2, sampleText3, sampleText4, sampleText5]
 
