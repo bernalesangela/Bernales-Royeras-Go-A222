@@ -1,10 +1,12 @@
 class TokenType:
+    Alphanumeric = "Alpha Numeric"
+    Word = "Word"
+    Number = "Number"
     Delimiter = "Delimiter"
-    LineBreak = "Line Break"  
-    Identifier = "Identifier"  
-    Punctuator = "Punctuation" 
-    Numeric = "Numeric"  
-    Whitespace = "Whitespace" 
+    LineBreak = "Line Break"
+    Punctuation = "Punctuation"
+    Whitespace = "Whitespace"
+    Mixed = "Mixed"  
 
 
 class Token:
@@ -16,88 +18,109 @@ class Token:
         return f"Token: '{self.value}' \t\t Type: '{self.type}'"
 
 
+def categorize(token):
+    has_alpha = any(char.isalpha() for char in token)
+    has_digit = any(char.isdigit() for char in token)
+    has_symbol = any(char in '!@#%^&$*()-_=+[{]}\\|;:\'",<.>/? ' for char in token)
 
-def tokenize(input_string):
+    if has_alpha and has_digit and not has_symbol:
+        return TokenType.Alphanumeric
+    elif has_symbol:
+        if has_alpha or has_digit:
+            return TokenType.Mixed
+        elif all(char in ' ' for char in token):
+            return TokenType.Whitespace
+        else:
+            return TokenType.Punctuation
+    elif has_alpha:
+        return TokenType.Word
+    elif has_digit:
+        return TokenType.Number
+    else:
+        return TokenType.Alphanumeric  
+
+
+
+def tokenize(inputString):
     tokens = []
+    newArr = []
+
     i = 0
+    while i < len(inputString):
+        ch = inputString[i]
 
-    while i < len(input_string):
-        ch = input_string[i]
+        if ch == ':':
+            if newArr:
+                tokenVal = ''.join(newArr)
+                token_type = categorize(tokenVal)
+                tokens.append(Token(token_type, tokenVal))
+                newArr.clear()
 
-        if ch == ':':  
-            delimiter = ch
+            tokens.append(Token(TokenType.Delimiter, ch))
             i += 1
-            tokens.append(Token(TokenType.Delimiter, delimiter))
 
-        elif ch == '\n': 
-            lineBreak = "\\n"
-            tokens.append(Token(TokenType.LineBreak, lineBreak))
+        elif ch == '\n':
+            if newArr:
+                tokenVal = ''.join(newArr)
+                token_type = categorize(tokenVal)
+                tokens.append(Token(token_type, tokenVal))
+                newArr.clear()
+
+            tokens.append(Token(TokenType.LineBreak, "\\n"))
             i += 1
-
-        elif ch.isalpha(): 
-            identifier = ""
-            while i < len(input_string) and (input_string[i].isalpha() or input_string[i] == '_'):
-                identifier += input_string[i]
-                i += 1
-            tokens.append(Token(TokenType.Identifier, identifier))
-
-        elif ch.isdigit():  
-            numeric = ""
-            while i < len(input_string) and (input_string[i].isdigit() or input_string[i] == '.'):
-                numeric += input_string[i]
-                i += 1
-            tokens.append(Token(TokenType.Numeric, numeric))
-
-        elif ch in '!@#%^&*()-_=+[{]}\\|;:\'",<.>/?':  
-            punctuator = ""
-            while i < len(input_string) and input_string[i] in '!@#%^&*()-_=+[{]}\\|;:\'",<.>/?':
-                punctuator += input_string[i]
-                i += 1
-            tokens.append(Token(TokenType.Punctuator, punctuator))
-
-        elif ch == ' ':  
-            whitespace = ""
-            while i < len(input_string) and input_string[i] == ' ':
-                whitespace += input_string[i]
-                i += 1
-            tokens.append(Token(TokenType.Whitespace, whitespace))
 
         else:
+            newArr.append(ch)
             i += 1
+
+    if newArr:
+        tokenVal = ''.join(newArr)
+        token_type = categorize(tokenVal)
+        tokens.append(Token(token_type, tokenVal))
 
     return tokens
 
-def granular_breakdown(tokens):
+
+def granularBreakdown(tokens):
     print("\n===============================================")
-    print("\nPhase 2 Output (Granular Breakdown):")
-    for token in tokens:
-        chars = ', '.join([f"'{char}'" for char in token.value])
-        print(f'Token: "{token.value}" --> {chars}')
+    print("\nGranular Breakdown:")
+    if tokens:
+
+        for token in tokens:
+            chars = ', '.join([f"'{char}'" for char in token.value])
+            print(f'Token: "{token.value}" --> {chars}')
+    else:
+        
+        print("No tokens generated (no delimiter present).")
 
 
 def main():
-    sampletext1 = "this:is a:sample text:"
-    sampletext2 = "Hello, world! Version 2.0 is here on 2024-08-27."
-    sampletext3 = "delimiter:_:test\n:New line here;"
-    sampletext4 = "123456:numbers:and:some:words:"
-    sampletext5 = "Punctuations:!@#$:^&*():"
+    sampleText1 = "123angela:bernales789"
+    sampleText2 = "Hello, world! Version 2.0 is here on 2024-08-27."
+    sampleText3 = "delimiter:_:test\n:New line here:"
+    sampleText4 = "123456:numbers:and:some:words:"
+    sampleText5 = ""
 
-    sample_texts = [sampletext1, sampletext2, sampletext3, sampletext4, sampletext5]
+    sampleTexts = [sampleText1, sampleText2, sampleText3, sampleText4, sampleText5]
 
-    for idx, input_data in enumerate(sample_texts, start=1):
+    for idx, sampleInput in enumerate(sampleTexts, start=1):
         print(f"\nSample Text {idx}:\n")
-        print(input_data)
+        print(sampleInput)
         print("\nTokens:")
 
-        tokens = tokenize(input_data)
+        tokens = tokenize(sampleInput)
 
-        for token in tokens:
-            print(token)
+        if tokens:
+            for token in tokens:
+                print(token)
+        else:
+            print("No tokens generated (no delimiter present).")
 
-        granular_breakdown(tokens)
+        granularBreakdown(tokens)
 
         print("\n")
 
 
 if __name__ == "__main__":
     main()
+
