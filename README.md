@@ -1,4 +1,4 @@
-# Tokenizer 🐦
+![image](https://github.com/user-attachments/assets/f7ee0370-7bcc-43c3-af4c-a41d09d272b3)# Tokenizer 🐦
 
 This program is a sample tokenizer written in Python with the use of customtkinter as its UI, and pillow to load images. 
 
@@ -31,3 +31,4 @@ The program has a simple UI built that enables users to enter their inputs. Afte
 ## Author Information
 - LinkedIn - [Mc Curvin](https://www.linkedin.com/in/mc-curvin-royeras-462a27251/)
 - Github - [Angela Nareen](https://github.com/bernalesangela)
+- LinkedIn - [Go Mardelito](https://www.linkedin.com/in/mardelito-go-bb5174224/)
