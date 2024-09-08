@@ -126,7 +126,7 @@ class TokenizerApp:
         self.input_text.pack(pady=10)
 
         # Button & Image
-        self.image = ctk.CTkImage(light_image=Image.open("token.png"), dark_image=Image.open("white_token.png"), size=(25, 25))
+        self.image = ctk.CTkImage(light_image=Image.open("token.png"), dark_image=Image.open("white_token.png"), size=(18, 18))
         self.tokenize_button = ctk.CTkButton(self.content_frame, text="Tokenize", image=self.image, compound="left", command=self.tokenize_text)
         self.tokenize_button.pack(pady=10)
 
