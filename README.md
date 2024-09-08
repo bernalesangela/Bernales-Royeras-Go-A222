@@ -22,11 +22,11 @@ The program has a simple UI built that enables users to enter their inputs. Afte
 ### Credits
 1. Visual Studio Community with Python
 2. Visual Studio Code
-3. [ctkResources/TomSchimansky] (https://github.com/TomSchimansky/CustomTkinter)
+3. [ctkResources/TomSchimansky](https://github.com/TomSchimansky/CustomTkinter)
 3. [customtkinter](https://customtkinter.tomschimansky.com/)
-4. [CTkScrollableFrame] (https://github.com/TomSchimansky/CustomTkinter/wiki/CTkScrollableFrame)
-5. [pillow] (https://pypi.org/project/pillow/)
-6. [emoji] (https://pypi.org/project/emoji/)
+4. [CTkScrollableFrame](https://github.com/TomSchimansky/CustomTkinter/wiki/CTkScrollableFrame)
+5. [pillow](https://pypi.org/project/pillow/)
+6. [emoji](https://pypi.org/project/emoji/)
 
 ## Author Information
 - LinkedIn - [Mc Curvin](https://www.linkedin.com/in/mc-curvin-royeras-462a27251/)
