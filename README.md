@@ -31,3 +31,4 @@ The program has a simple UI built that enables users to enter their inputs. Afte
 ## Author Information
 - LinkedIn - [Mc Curvin](https://www.linkedin.com/in/mc-curvin-royeras-462a27251/)
 - Github - [Angela Nareen](https://github.com/bernalesangela)
+- LinkedIn [Go Mardelito](https://www.linkedin.com/in/mardelito-go-bb5174224/)
