@@ -27,7 +27,7 @@ class Token:
 def categorize(token):
     has_alpha = any(char.isalpha() for char in token)
     has_digit = any(char.isdigit() for char in token)
-    has_symbol = any(char in '!@#%^&$*()-_=+[{]}\\|;:\'",<.>/? ' for char in token)
+    has_symbol = any(char in '!@#%^&$*()-_=+[{]}\\|;\'",<.>/? ' for char in token)
 
     if has_alpha and has_digit and not has_symbol:
         return TokenType.Alphanumeric
@@ -48,6 +48,7 @@ def categorize(token):
         return TokenType.Alphanumeric
 
 # Tokenize the input string
+# Tokenize the input string
 def tokenize(inputString):
     tokens = []
     newArr = []
@@ -56,36 +57,43 @@ def tokenize(inputString):
     while i < len(inputString):
         ch = inputString[i]
 
+        # Handle delimiters
         if ch == ':':
+            # If there's something in newArr, form a token
             if newArr:
                 tokenVal = ''.join(newArr)
                 token_type = categorize(tokenVal)
                 tokens.append(Token(token_type, tokenVal))
                 newArr.clear()
-
-            tokens.append(Token(TokenType.Delimiter, ch))
+            # tokens.append(Token(TokenType.Delimiter, ch))  # Delimiter skipped
+            # Move past the delimiter
             i += 1
 
         elif ch == '\n':
+            # If there's something in newArr, form a token
             if newArr:
                 tokenVal = ''.join(newArr)
                 token_type = categorize(tokenVal)
                 tokens.append(Token(token_type, tokenVal))
                 newArr.clear()
 
+            # Add a LineBreak token
             tokens.append(Token(TokenType.LineBreak, "\\n"))
             i += 1
 
         else:
+            # Collect the character in newArr
             newArr.append(ch)
             i += 1
 
+    # Add any remaining characters as a token
     if newArr:
         tokenVal = ''.join(newArr)
         token_type = categorize(tokenVal)
         tokens.append(Token(token_type, tokenVal))
 
     return tokens
+
 
 # Granular breakdown function
 def granular_breakdown(tokens):
